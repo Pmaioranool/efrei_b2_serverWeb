@@ -1,6 +1,8 @@
-<form action="" method="post">
-    <input type="hidden" name="id_user" id="id_user" value="<?= $_GET['id'] ?>">
+<form action="index.php?page=user" method="post">
+    <input type="email" name="email" id="email" value="<?= $_POST['email'] ?>">
+    <br>
     <input type="text" name="MDP" id="MDP">
     <br>
     <input type="submit" name="submit" id="submit">
+
 </form>
