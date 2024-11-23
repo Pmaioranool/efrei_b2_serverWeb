@@ -1,4 +1,5 @@
 <?php
+
 $page = isset($_GET['page']) ? $_GET['page'] : 'accueil';
 
 switch ($page) {
@@ -7,16 +8,11 @@ switch ($page) {
     case 'produit':
         include_once "controller/productController.php";
         break;
+    case 'admin':
+        include_once "controller/adminController.php";
+        break;
     case 'user':
-        $role = isset($_GET['role']) ? $_GET['role'] : 'membre';
-        switch ($role) {
-            case 'admin':
-                include_once "controller/adminController.php";
-                break;
-            default:
-                include_once 'controller/userController.php';
-                break;
-        }
+        include_once 'controller/userController.php';
         break;
     default:
         include_once 'view/accueil.php';

@@ -4,10 +4,22 @@
 
   --principalColor: #e3e6f3;
   --decoration: #088178;
+  --light-decoration: #2ab8ac;
   --shadow: 0 5px 15px rgba(0, 0, 0, 0.678);
   --h: #111;
 }
 
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  min-height: 100%; /* Prend toute la hauteur */
+  display: flex;
+  flex-direction: column;
+  background-color: #f3f3f3;
+}
 ul,
 ol {
   list-style: none;
@@ -49,6 +61,47 @@ p {
   margin: 15px 0 20px 0;
 }
 
+.centered {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.centered form {
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.centered form input,
+.centered form textarea {
+  margin: 1rem 20%;
+  padding: 0.75em 0.7em;
+  width: 100%;
+  border-radius: 20px;
+  text-align: center;
+  background-color: #ebebeb;
+  border: none;
+}
+.centered form textarea {
+  resize: none;
+  height: 30%;
+}
+.centered form input:hover,
+.centered form textarea:hover {
+  background-color: #c4c4c4;
+}
+
+.centered form input[type="submit"] {
+  width: 20%;
+  background-color: var(--light-decoration);
+}
+
+.centered h1 {
+  padding-bottom: 2rem;
+}
+
 .pad-produit {
   padding: 0 80px;
 }
@@ -68,23 +121,23 @@ p {
   left: 0;
 }
 
-#navbar {
+.header a img {
+  width: 20%;
+}
+
+.navbar {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-#header a img {
-  width: 20%;
-}
-
-#navbar li {
+.navbar li {
   list-style: none;
   padding: 0 20px;
   position: relative;
 }
 
-#navbar li a {
+.navbar li a {
   text-decoration: none;
   font-size: 16px;
   font-weight: 600;
@@ -92,13 +145,13 @@ p {
   transition: 0.3s ease;
 }
 
-#navbar li a:hover,
-#navbar li a.active {
+.navbar li a:hover,
+.navbar li a.active {
   color: var(--decoration);
 }
 
-#navbar li a.active::after,
-#navbar li a:hover::after {
+.navbar li a.active::after,
+.navbar li a:hover::after {
   content: "";
   width: 30%;
   height: 2px;
@@ -129,7 +182,7 @@ p {
 
 .bienvenue button {
   cursor: pointer;
-  background-color: #2ab8ac;
+  background-color: var(--light-decoration);
   border: none;
   border-radius: 20px;
   padding: 0.35%;
@@ -272,4 +325,8 @@ footer section:last-of-type {
 footer section:first-of-type {
   border: none;
   width: 100%;
+}
+
+main {
+  flex: 1;
 }

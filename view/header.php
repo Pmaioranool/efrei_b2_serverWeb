@@ -1,7 +1,7 @@
 <?php
 
 include_once 'model/commandeModel.php';
-
+// 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,6 +13,7 @@ include_once 'model/commandeModel.php';
     <script src="https://kit.fontawesome.com/020fe7311e.js" crossorigin="anonymous"></script>
     <title>Document</title>
     <script src="//unpkg.com/alpinejs" defer></script>
+    <script src="javascript/main.js " defer></script>
 </head>
 
 <body>
@@ -22,17 +23,30 @@ include_once 'model/commandeModel.php';
         </a>
 
         <nav>
-            <ul id="navbar">
-                <li>
+            <ul id="headerMenu" class="navbar">
+            <li>
                     <a href="index.php?page=accueil"
                         <?php echo ($_GET['page'] == 'accueil') ? 'class="active"' : ''; ?>>Home</a>
                 </li>
                 <li>
-                    <a href="index.php?page=produit"
+                    <a href="index.php?page=produit&use=produit"
                         <?php echo ($_GET['page'] == 'produit') ? 'class="active"' : ''; ?>>Shop</a>
                 </li>
                 <?php
-                    if (isset($_POST['id_user']) && !empty($_POST['id_user'])){
+                ?>
+                <li>
+
+                    <a href="index.php?page=user&use=register"
+                        <?php if(isset($_GET['use']) && !empty($_GET['use'])){echo ($_GET['use'] == 'register') ? 'class="active"' : '';} ?>>register</a>
+                </li>
+                <li>
+
+                    <a href="index.php?page=user&use=login"
+                        <?php if(isset($_GET['use']) && !empty($_GET['use'])){echo ($_GET['use'] == 'login') ? 'class="active"' : '';} ?>>login</a>
+                </li>
+                <?php
+                // regarde si il y a id_user en post pour afficher le panier
+                    if ($localStorage){
                         $panier = getACommandeByUser($_POST['id_user']);
                         ?>
                 <li>
@@ -42,11 +56,38 @@ include_once 'model/commandeModel.php';
                 </li>
                 <?php
                     }
+                    //TODO: faire un if pour vérifier si l'utilisateur est admin
                     ?>
                 <li>
-                    <a href="index.php?page=user&role=admin"
-                        <?php echo ($_GET['page'] == 'user') ? 'class="active"' : ''; ?>>Admin</a>
+                    <a href="index.php?page=admin"
+                        <?php echo ($_GET['page'] == 'admin') ? 'class="active"' : ''; ?>>Admin</a>
                 </li>
             </ul>
         </nav>
     </header>
+
+    <script>
+    // Vérifier la présence de userID dans le Local Storage
+    const userId = localStorage.getItem('userID');
+    const headerMenu = document.getElementById('headerMenu');
+
+    if (userId) {
+        // Utilisateur connecté
+        headerMenu.innerHTML = `
+                
+            `;
+
+        // Gérer la déconnexion
+        document.getElementById('logout').addEventListener('click', () => {
+            localStorage.removeItem('userID');
+            alert('Vous êtes déconnecté.');
+            window.location.href = 'login.php'; // Redirection vers la page de connexion
+        });
+    } else {
+        // Utilisateur non connecté
+        headerMenu.innerHTML = `
+                <li><a href="login.php">Connexion</a></li>
+                <li><a href="register.php">Inscription</a></li>
+            `;
+    }
+    </script>
