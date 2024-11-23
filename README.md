@@ -6,9 +6,9 @@ efrei_b2_serverWeb <!-- omit in toc -->
 
 
 # à faire
-- [ ] **Accueil** : Présentation générale.
-- [ ] **Catalogue** : Liste de produits.
-- [ ] **Détail produit** : Affichage des informations sur un produit sélectionné.
+- [x] **Accueil** : Présentation générale.
+- [x] **Catalogue** : Liste de produits.
+- [x] **Détail produit** : Affichage des informations sur un produit sélectionné.
 - [ ] **Login** : Connexion utilisateur.
 - [ ] **Register** : Inscription utilisateur.
 - [ ] **Panier** : Liste des articles ajoutés au panier.

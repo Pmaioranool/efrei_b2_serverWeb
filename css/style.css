@@ -49,6 +49,10 @@ p {
   margin: 15px 0 20px 0;
 }
 
+.pad-produit {
+  padding: 0 80px;
+}
+
 /* Page header */
 
 #header {
@@ -136,10 +140,114 @@ p {
   text-align: center;
 }
 
+.arrivages .products {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+article {
+  display: flex;
+  flex-direction: column;
+  border: dotted 2px black;
+  padding: 1em;
+  margin: 1%;
+  justify-content: space-evenly;
+  border-radius: 10px;
+  width: 20%;
+  cursor: pointer;
+}
+
 .soldes {
   text-align: center;
 }
 
+/* Page produit spe */
+
+.produit-spe {
+  display: flex;
+  margin: 2rem 0;
+  padding: 0 40px;
+}
+
+.produit-spe img {
+  width: 40%;
+  margin-right: 2%;
+}
+
+.produit-spe .desc-prod-spe {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  padding-top: 30px;
+}
+
+.produit-spe .desc-prod-spe h1 {
+  margin-bottom: 0.5rem;
+  text-align: center;
+  border-bottom: solid 2px black;
+  margin: 0 12%;
+}
+
+.produit-spe .desc-prod-spe p {
+  padding: 2%;
+  min-height: 40%;
+}
+.produit-spe .desc-prod-spe input {
+  width: 50px;
+  height: 47px;
+  padding-left: 10px;
+  font-size: 16px;
+  margin-right: 10px;
+}
+.produit-spe .desc-prod-spe input:focus {
+  outline: none;
+}
+
+.produit-spe .desc-prod-spe button {
+  line-height: 100%;
+}
+.produit-spe .desc-prod-spe button,
+.produit-spe .desc-prod-spe input {
+  min-width: 2%;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  border: none;
+  margin-top: 1.1%;
+  max-height: 50%;
+}
+.produit-spe .desc-prod-spe input {
+  color: #000;
+  width: 10%;
+  text-wrap: wrap;
+  margin: 0%;
+  max-height: 100%;
+  margin-left: 0.75em;
+}
+
+.produit-spe .desc-prod-spe button:hover,
+.produit-spe .desc-prod-spe input:hover {
+  background-color: #bbb;
+}
+
+.produit-spe .desc-prod-spe span {
+  width: 0.5em;
+  padding: 1em 0.25em;
+}
+
+.produit-spe .desc-prod-spe strong {
+  font-weight: bold;
+  font-size: 1.3em;
+  text-align: right;
+  margin-right: 17%;
+}
+.produit-spe .desc-prod-spe form {
+  display: flex;
+  justify-content: right;
+  margin-right: 9.5%;
+  flex-wrap: wrap;
+}
 /* Page footer */
 
 footer {

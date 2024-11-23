@@ -7,7 +7,7 @@
             </p>
         </div>
         <div class="form">
-            <input type="text" placeholder="Your email address"/>
+            <input type="text" placeholder="Your email address" />
             <button class="normal">Sign Up</button>
         </div>
     </section>
@@ -21,9 +21,9 @@
     <section>
         <h3>Navigation</h3>
         <ul>
-            <li><a href="index.php">Accueil</a></li>
-            <li><a href="about.php">À propos</a></li>
-            <li><a href="contact.php">Contact</a></li>
+            <li><a href="index.php?page=accueil">Accueil</a></li>
+            <li><a href="#">À propos</a></li>
+            <li><a href="#">Contact</a></li>
         </ul>
     </section>
 
@@ -36,4 +36,7 @@
         </div>
     </section>
     <p>&copy; 2024 Tous droits réservés.</p>
-</footer></body></html>
+</footer>
+</body>
+
+</html>
