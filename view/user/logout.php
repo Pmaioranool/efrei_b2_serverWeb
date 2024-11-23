@@ -2,7 +2,7 @@
 
 <script>
 localStorage.removeItem('userId');
-window.location.href = 'login.php';
+window.location.href = 'index.php?page=accueil';
 </script>
 
 <p>Déconnexion...</p>
