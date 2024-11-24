@@ -1,7 +1,7 @@
 <main></main>
 
 <script>
-localStorage.removeItem('userId');
+    localStorage.removeItem('userId');
 window.location.href = 'index.php?page=accueil';
 </script>
 

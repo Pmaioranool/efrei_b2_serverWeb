@@ -4,6 +4,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'accueil';
 
 switch ($page) {
     case 'panier':
+        include_once "controller/panierController.php";
         break;
     case 'produit':
         include_once "controller/productController.php";

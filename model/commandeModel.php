@@ -43,7 +43,7 @@ function getAllCommandeByUser($id_user)
 function getACommandeByUser($id_user)
 {
     global $mysqlClient;
-    $sqlQuery = "SELECT * FROM commandes WHERE id_user = $id_user ORDER BY date DESC LIMIT 1";
+    $sqlQuery = "SELECT * FROM commandes WHERE id_user = $id_user ORDER BY date_creation DESC LIMIT 1";
     $panier = $mysqlClient->query($sqlQuery);
     $panier->execute();
     return $panier->fetch(PDO::FETCH_ASSOC);

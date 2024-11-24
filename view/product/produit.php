@@ -1,8 +1,8 @@
 <?php
 
 include_once 'controller/productController.php';
-
 $produit = getAProduit($_GET['id']);
+
 ?>
 
 <main>
@@ -23,6 +23,5 @@ $produit = getAProduit($_GET['id']);
 
         </div>
     </div>
-
-
 </main>
+
