@@ -1,31 +1,8 @@
 <?php
 include_once "controller/userController.php"
 
-    /*
-    <section>
-        <form action="index.php?page=user" method="post">
-            <input type="email" name="email" id="email" value="<?= $_POST['email'] ?>">
-<br>
-<input type="text" name="MDP" id="MDP">
-<br>
-<input type="text" name="nom" id="nom">
-<br>
-<input type="text" name="prenom" id="prenom">
-<br>
-<input type="submit" name="submit" id="submit">
-</form>
-</section>
 
-<script>
-localStorage.setItem('userID',
-    <?= $user['id'] ?>
-);
-</script>
-
-*/
-
-
-?>
+    ?>
 <main class="centered">
     <h1>Créer mon compte</h1>
     <form action="index.php?page=user&use=register" method="post">
@@ -57,14 +34,17 @@ if (
     isset($_POST['prenom']) && !empty($_POST['prenom'])
 ) {
     // Vérifier si l'utilisateur existe déjà
-    if (!isUser($_POST)) {
+    if (!isUser($_POST['email'])) {
         // Enregistrer l'utilisateur
         register($_POST);
         // Récupérer l'ID de l'utilisateur
         $userId = getUserId($_POST['email']);
-        echo "<script>localStorage.setItem('userID', '{$userId['id_user']}');</script>";
+        addCommande($userId['id_user']);
+        $_SESSION['userID'] = $userId['id_user'];
+        header('Location: index.php?page=accueil');
+
     } else {
-        echo "L'email existe déjà.";
+        echo '<div class="incorrect">L\'email existe déjà.</div >';
     }
 }
 ?>

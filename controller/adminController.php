@@ -1,5 +1,8 @@
 <?php
 
+include_once 'controller/restrictionController.php';
+isConnected();
+isAdmin();
 include_once 'model/productModel.php';
 include_once 'view/user/admin.php';
 

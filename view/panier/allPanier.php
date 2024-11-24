@@ -1,9 +1,11 @@
 <?php
 include_once 'controller/panierController.php';
 
+if (isset($_SESSION['userID'])) {
+    $userID = isset($_SESSION['userID']) ? $_SESSION['userID'] : null;
 
-$id_user = intval(value: $_GET['id']); // Récupérer et sécuriser l'ID utilisateur
-$paniers = getAllCommandeByUser($id_user); // Appeler la fonction pour récupérer le panier
+    $paniers = getAllCommandeByUser($userID); // Appeler la fonction pour récupérer le panier
+}
 ?>
 
 <main class="contenu-panier">
@@ -20,7 +22,8 @@ $paniers = getAllCommandeByUser($id_user); // Appeler la fonction pour récupér
             <?php } ?>
         <?php } ?>
 
-    <?php else: ?><p>Aucune commande existante.
+    <?php else: ?><p>
+        Aucune commande existante.
     </p>
     <?php endif; ?>
 </main>

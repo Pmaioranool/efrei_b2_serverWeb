@@ -1,6 +1,7 @@
 <?php
 
 include_once 'model/userModel.php';
+include_once 'model/commandeModel.php';
 
 $use = isset($_GET['use']) ? $_GET['use'] : 'accueil';
 
@@ -17,4 +18,3 @@ switch ($use) {
 
         break;
 }
-

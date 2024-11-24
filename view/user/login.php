@@ -35,12 +35,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (login($email, $MDP)) {
         // Récupérer l'ID de l'utilisateur
         $userId = getUserId($email);
-        echo "<script>localStorage.setItem('userID', '{$userId['id_user']}');
-        window.location.href = 'index.php?page=accueil';</script>";
+        $_SESSION['userID'] = $userId['id_user'];
+        header('Location: index.php?page=accueil');
         echo '<div class="success">Connexion réussie.</div>';
     } else {
         echo '<div class="incorrect">Identifiants incorrects.</div>';
     }
 }
 ?>
-

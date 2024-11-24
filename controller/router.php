@@ -1,7 +1,7 @@
 <?php
+$page = $_GET['page'];
 
-$page = isset($_GET['page']) ? $_GET['page'] : 'accueil';
-
+// Inclure le bon contrôleur en fonction de la page demandée
 switch ($page) {
     case 'panier':
         include_once "controller/panierController.php";
@@ -16,6 +16,7 @@ switch ($page) {
         include_once 'controller/userController.php';
         break;
     default:
-        include_once 'view/accueil.php';
+        include_once 'view/accueil.php'; // Page par défaut
         break;
 }
+?>

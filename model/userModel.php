@@ -9,10 +9,11 @@ function isUser($email)
     $sqlQuery = "SELECT id_user FROM users WHERE email = :email";
     $getEmail = $mysqlClient->prepare($sqlQuery);
     $getEmail->execute([
-        'email' => $email['email']
+        'email' => $email // Change this line to accept $email directly
     ]);
     return $getEmail->fetch() !== false;
 }
+
 
 function getUserId($email)
 {
