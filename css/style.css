@@ -350,3 +350,132 @@ main {
   text-align: center;
   font-size: 2.1em;
 }
+
+/* & Page Panier */
+
+.panier-container {
+  display: flex;
+  text-align: center;
+  margin: 2% 0% 2% 17%;
+  padding: 2%;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 50%;
+}
+
+.panier-container h1 {
+  width: 100%;
+}
+
+.panier-container .panier-produit {
+  display: flex;
+  width: 100%;
+  margin-right: 2%;
+  flex-wrap: wrap;
+}
+
+.panier-produit .produit img {
+  width: 22%;
+  margin: 2%;
+}
+
+.panier-produit .produit section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  width: 60%;
+}
+
+.panier-container .panier-produit .produit {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  border-bottom: 1px solid var(--h);
+  margin: 2%;
+  padding: 2%;
+}
+
+.main-panier {
+  display: flex;
+  width: 100%;
+}
+
+.somme {
+  width: 20%;
+  position: relative;
+  top: 20%;
+  left: 3%;
+  height: fit-content;
+  width: 13%;
+  padding: 1.5%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 2em;
+}
+.somme p {
+  margin: 0;
+  padding: 4%;
+  padding-top: 0;
+}
+
+.somme span {
+  font-size: 1.6em;
+  font-weight: 600;
+  text-align: right;
+  margin: 0;
+  padding: 4%;
+  padding-top: 0;
+}
+
+.panier-container,
+.somme {
+  background-color: white;
+  border-radius: 2em;
+}
+
+.panier-container .panier-produit .produit section p {
+  text-align: left;
+  width: 70%;
+}
+
+.panier-container .panier-produit .produit section p a {
+  border-left: 1px solid var(--light-decoration);
+  padding: 0 2%;
+  margin-left: 2%;
+}
+
+/* Page All Paniers */
+
+.all-paniers {
+  text-align: center;
+  margin: 10%;
+}
+
+.all-paniers .all-paniers-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 1rem;
+  border: 1px solid black;
+  border-radius: 2em;
+}
+
+.all-paniers .all-paniers-container .produit {
+  display: flex;
+  width: 100%;
+  border-bottom: 1px solid var(--h);
+}
+
+.all-paniers .all-paniers-container .produit img {
+  width: 22%;
+  margin: 2%;
+}
+
+.all-paniers .all-paniers-container .produit section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  width: 60%;
+}

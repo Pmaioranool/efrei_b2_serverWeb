@@ -22,3 +22,11 @@ function getProduitInCommande($IDcommande)
     $prodInCom->execute();
     return $prodInCom->fetchAll();
 }
+
+function suppProduitInCommande($id_cp)
+{
+    global $mysqlClient;
+    $sqlQuery = "DELETE FROM commande_produit WHERE id_cp = $id_cp;";
+    $supp = $mysqlClient->prepare($sqlQuery);
+    $supp->execute();
+}

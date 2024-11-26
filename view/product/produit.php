@@ -15,7 +15,7 @@ $produit = getAProduit($_GET['id']);
             <form action="index.php?page=produit&id=<?= $produit['id_produit'] ?>" method="post" x-data="{ qt: 1 }">
                 <button type="button" @click="if (qt > 1) qt--">-</button>
                 <span x-text="qt"></span>
-                <button type="button" @click="if (qt < 5)qt++">+</button>
+                <button type="button" @click="if (qt < 10)qt++">+</button>
                 <input type="hidden" name="quantite" :value="qt">
                 <input type="hidden" name="id_produit" value="<?= $produit['id_produit'] ?>">
                 <input type="submit" value="Ajouter au panier">
@@ -24,4 +24,3 @@ $produit = getAProduit($_GET['id']);
         </div>
     </div>
 </main>
-

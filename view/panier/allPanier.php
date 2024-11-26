@@ -6,25 +6,41 @@ if (isset($_SESSION['userID'])) {
 
     $paniers = getAllCommandeByUser($userID); // Appeler la fonction pour récupérer le panier
 }
+$somme = 0;
 ?>
 
-<main class="contenu-panier">
-    <h1>Vos Panier</h1>
-    <?php if ($paniers): ?>
+<main class="all-paniers">
+    <h1>Vos Paniers</h1>
+    <?php if ($paniers) { ?>
         <!-- Boucle pour afficher les produits dans le panier -->
         <?php foreach ($paniers as $panier) {
-            $produits = getProduitInCommande($panier['id_commande']);
-            foreach ($produits as $produit) { ?>
-                    <div class="produit"> <h2><?= $produit['nom']; ?></h2>
-                    <p>Prix :<?= $produit['prix']; ?>€</p>
-                    <p>Quantité :<?= $produit['quantite']; ?></p>
-                </div>
+            $produits = getProduitInCommande($panier['id_commande']); ?><h3>Panier du
+                <?= $panier['date_creation'] ?>
+            </h3>
+            <div
+                class="all-paniers-container">
+                <?php foreach ($produits as $produit) { ?>
+                    <div class="produit">
+                        <img src="image/<?= $produit['image'] ?>" alt="">
+                        <section>
+                            <h2><?= $produit['nom']; ?></h2>
+                            <p>Prix :<?= $produit['prix']; ?>€</p>
+                            <p>Quantite :
+                                <?= $produitInCommande['quantite']; ?>
+                            </p>
+                        </section>
+                    </div>
+                    <?php $somme += $produit['prix'] * $produitInCommande['quantite'];
+                } ?>
+                <p>Prix total :
+                    <?= $somme ?>
+                </p>
             <?php } ?>
-        <?php } ?>
-
-    <?php else: ?><p>
-        Aucune commande existante.
-    </p>
-    <?php endif; ?>
+        </div>
+    <?php } else { ?>
+        <p>
+            Aucune commande existante.
+        </p>
+    <?php } ?>
 </main>
 
