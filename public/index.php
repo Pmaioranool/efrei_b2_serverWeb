@@ -1,7 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/../src/controllers/MainController.php';
+require_once __DIR__ . '/../src/controllers/CoreController.php';
 
 $router = require_once __DIR__ . '/../src/router/routes.php';
 
@@ -17,8 +17,8 @@ if ($match) {
     if (class_exists($controller) && method_exists($controller, $method)) {
         (new $controller())->$method();
     } else {
-        (new MainController())->notFound();
+        (new CoreController())->notFound();
     }
 } else {
-    (new MainController())->notFound();
+    (new CoreController())->notFound();
 }

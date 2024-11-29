@@ -7,7 +7,7 @@
             </p>
         </div>
         <div class="form">
-            <input type="text" placeholder="Your email address"/>
+            <input type="text" placeholder="Your email address" />
             <button class="normal">Sign Up</button>
         </div>
     </section>
@@ -36,4 +36,7 @@
         </div>
     </section>
     <p>&copy; 2024 Tous droits réservés.</p>
-</footer></body></html>
+</footer>
+</body>
+
+</html>
