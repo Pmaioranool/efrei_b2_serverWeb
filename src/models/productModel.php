@@ -1,9 +1,10 @@
 <?php
+require_once __DIR__ . '/CoreModel.php';
 
-include_once "bdd.php";
 class productModel
 {
     //TODO: Ajouter un panel admin avec roles
+
     public function addProduit($post)
     {
         global $mysqlClient;

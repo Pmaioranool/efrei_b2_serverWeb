@@ -1,6 +1,6 @@
 <?php
+require_once __DIR__ . '/CoreModel.php';
 
-include_once "bdd.php";
 
 class commandeModel
 {

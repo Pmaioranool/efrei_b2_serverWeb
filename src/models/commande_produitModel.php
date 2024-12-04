@@ -1,6 +1,7 @@
 <?php
+require_once __DIR__ . '/CoreModel.php';
 
-include_once "bdd.php";
+
 class commande_produitModel
 {
     function addCommandeProduit($id_commande, $id_produit, $quantite)

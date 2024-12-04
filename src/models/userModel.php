@@ -1,6 +1,6 @@
 <?php
+require_once __DIR__ . '/CoreModel.php';
 
-include_once 'model/bdd.php';
 class userModel
 {
     function isUser($email)
@@ -57,4 +57,6 @@ class userModel
         } else
             return false;
     }
+
+
 }

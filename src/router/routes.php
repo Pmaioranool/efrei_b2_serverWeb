@@ -16,6 +16,7 @@ $router->map('GET', '/admin', 'CoreController#admin', 'admin');
 $router->map('GET', '/logout', 'CoreController#logout', 'logout');
 $router->map('GET', '/register', 'CoreController#register', 'register');
 $router->map('GET', '/login', 'CoreController#login', 'login');
+$router->map('GET', '/commandes', 'CoreController#commandes', 'commandes');
 
 
 // Retourne l'objet router

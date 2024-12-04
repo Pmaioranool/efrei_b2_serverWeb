@@ -6,11 +6,11 @@ require_once __DIR__ . '/../models/productModel.php';
 require_once __DIR__ . '/../models/userModel.php';
 require_once __DIR__ . '/panierController.php';
 require_once __DIR__ . '/productController.php';
-require_once __DIR__ . '/restrictionController.php';
 
 
 class CoreController
 {
+
     // Page d'accueil
     public function home()
     {
@@ -32,11 +32,8 @@ class CoreController
     public function panier()
     {
         $this->isConnected();
-        if (isset($_GET['id']) && !empty($_GET['id'])) {
-            return $this->render('panier/panier');
-        } else {
-            return $this->render('panier/allPanier');
-        }
+        $this->render('panier/panier');
+
     }
     // Page "admin"
     public function admin()
@@ -60,6 +57,12 @@ class CoreController
     public function login()
     {
         $this->render('user/login');
+        $this->getUser();
+    }
+    //Page "commandes"
+    public function commandes()
+    {
+        $this->render('panier/allPanier');
     }
     // Page 404
     public function notFound()
@@ -97,6 +100,23 @@ class CoreController
     {
         if (!$_SESSION['admin'] == true) {
             header('Location:index.php?accueil');
+        }
+    }
+    public function getUser()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $email = $_POST['email'];
+            $MDP = $_POST['MDP'];
+            $userManager = new userModel();
+            // Vérifier les informations de connexion
+            if ($userManager->login($email, $MDP)) {
+                // Récupérer l'ID de l'utilisateur
+                $userId = $userManager->getUserId($email);
+                $_SESSION['userID'] = $userId['id_user'];
+                header('Location: /');
+            } else {
+                echo '<div class="incorrect">Identifiants incorrects.</div>';
+            }
         }
     }
 }
