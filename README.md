@@ -2,7 +2,12 @@ efrei_b2_serverWeb <!-- omit in toc -->
 ===
 
 - [à faire](#à-faire)
-- [panier](#panier)
+- [Simple PHP Project](#simple-php-project)
+- [This is a simple PHP project that uses composer to manage dependencies.](#this-is-a-simple-php-project-that-uses-composer-to-manage-dependencies)
+  - [Installation](#installation)
+  - [Start server using php](#start-server-using-php)
+    - [You can now access the project at `http://localhost:5001` in your browser.](#you-can-now-access-the-project-at-httplocalhost5001-in-your-browser)
+  - [create new user for mysql](#create-new-user-for-mysql)
 
 
 # à faire
@@ -38,3 +43,10 @@ php -S localhost:5001 -t public
 ```
 
 ### You can now access the project at `http://localhost:5001` in your browser.
+
+
+## create new user for mysql
+
+```mysql
+CREATE USER 'username'@'hostname' IDENTIFIED BY 'password';
+```

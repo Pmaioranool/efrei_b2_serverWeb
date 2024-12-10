@@ -1,5 +1,8 @@
 <?php
-require_once __DIR__ . '/CoreModel.php';
+
+namespace App\Models;
+use App\Utils\Database;
+use PDO;
 
 class userModel
 {
