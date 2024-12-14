@@ -1,23 +1,27 @@
 <?php
-
+session_start();
 // Ici j'inclus le fichier autoload.php car c'est grâce à ce fichier que je vais pouvoir inclure TOUTES mes dépendances composer (donc ce qu'il y a dans le dossier vendor)
 require_once __DIR__ . "/../vendor/autoload.php";
 
 use AltoRouter;
 use App\Controllers\MainController;
+use App\Controllers\ProductController;
+use App\Controllers\UserController;
+use App\Controllers\PanierController;
 
 // Je créer une instance de AltoRouter (la librairie que j'ai installé)
 $router = new AltoRouter();
 
 // On fournit à AltoRouter la partie de l'URL à ne pa sprendre en compte pour faire la comparaison entre l'URL courante et l'url de la route
 // LA valeur de $_SERVER['BASE_URI'] est donnée par le fichier .htaccess. Elle correspond au chemin de la racine du site, ici se termine par public
-$router->setBasePath($_SERVER['BASE_URI']); // Je définis le chemin de base => ce par quoi mes routes vont commencer (localhost/.../public)
+$router->setBasePath(null); // Je définis le chemin de base => ce par quoi mes routes vont commencer (localhost/.../public)
 
 // Ici, je créer mes routes (https://altorouter.com/usage/mapping-routes.html)
 
 // Ci dessous je dump(j'affiche) CatalogController::class
 // CatalogController::class => c'est le nom complet de la classe CatalogController, cad que ca va afficher le namespace de cette classe + le nom de la classe => App\Controllers\CatalogController
 $router->addRoutes(array(
+    // affiche la page d'accueil
     array(
         'GET',
         '/',
@@ -27,6 +31,105 @@ $router->addRoutes(array(
         ],
         'home'
     ),
+    // regarde dans l'URL si il y a l'id du produit et ensuite decide si il va sur le page du produit ou sur le catalogue
+    array(
+        'GET',
+        '/produit',
+        [
+            'controller' => MainController::class, // Dans quel controller ?
+            'action' => 'produit' // Quelle méthode dans ce controller ?
+        ],
+        'produits'
+    ),
+    array(
+        'POST',
+        '/produit',
+        [
+            'controller' => PanierController::class, // Dans quel controller ?
+            'action' => 'addProductInPanier' // Quelle méthode dans ce controller ?
+        ],
+        'addProduitsPanier'
+    ),
+    // affiche la page register
+    array(
+        'GET',
+        '/register',
+        [
+            'controller' => UserController::class, // Dans quel controller ?
+            'action' => 'register' // Quelle méthode dans ce controller ?
+        ],
+        'register'
+    ),
+    // ajoute depuis le POST un nouveau user
+    array(
+        'POST',
+        '/register',
+        [
+            'controller' => UserController::class, // Dans quel controller ?
+            'action' => 'registerUser' // Quelle méthode dans ce controller ?
+        ],
+        'registerPOST'
+    ),
+    // affiche la page login
+    array(
+        'GET',
+        '/login',
+        [
+            'controller' => UserController::class, // Dans quel controller ?
+            'action' => 'login' // Quelle méthode dans ce controller ?
+        ],
+        'login'
+    ),
+    // regarde si les information du post correspondent avec la bdd
+    array(
+        'POST',
+        '/login',
+        [
+            'controller' => UserController::class, // Dans quel controller ?
+            'action' => 'loginUser' // Quelle méthode dans ce controller ?
+        ],
+        'loginPOST'
+    ),
+    // supprime si il y a une valeur dans $_SESSION['userID'] et affiche la page accueil
+    array(
+        'GET',
+        '/logout',
+        [
+            'controller' => UserController::class, // Dans quel controller ?
+            'action' => 'logout' // Quelle méthode dans ce controller ?
+        ],
+        'logout'
+    ),
+    // affiche la page admin
+    array(
+        'GET',
+        '/admin',
+        [
+            'controller' => UserController::class, // Dans quel controller ?
+            'action' => 'admin' // Quelle méthode dans ce controller ?
+        ],
+        'admin'
+    ),
+    // affiche la page panier
+    array(
+        'GET',
+        '/panier',
+        [
+            'controller' => PanierController::class, // Dans quel controller ?
+            'action' => 'panier' // Quelle méthode dans ce controller ?
+        ],
+        'panier'
+    ),
+    // supprimer un article du panier
+    array(
+        'GET',
+        '/panierSupp',
+        [
+            'controller' => PanierController::class, // Dans quel controller ?
+            'action' => 'supprimer' // Quelle méthode dans ce controller ?
+        ],
+        'supprimerInPanier'
+    )
 
 ));
 

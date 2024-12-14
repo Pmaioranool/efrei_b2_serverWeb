@@ -21,9 +21,7 @@
     <section>
         <h3>Navigation</h3>
         <ul>
-            <li><a href="index.php?page=accueil">Accueil</a></li>
-            <li><a href="#">À propos</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="/">Accueil</a></li>
         </ul>
     </section>
 

@@ -6,32 +6,44 @@ use PDO;
 
 class commande_produitModel
 {
-    function addCommandeProduit($id_commande, $id_produit, $quantite)
+    private $id;
+    private $idCommande;
+    private $idProduit;
+    private $quantite;
+
+    public function __construct($id = null, $idC = null, $idP = null, $qt = null)
     {
-        global $mysqlClient;
+        $this->id = $id;
+        $this->idCommande = $idC;
+        $this->idProduit = $idP;
+        $this->quantite = $qt;
+    }
+    function addCommandeProduit()
+    {
+        $pdo = Database::getPDO();
         $sqlQuery = "INSERT into commande_produit(quantite, id_commande, id_produit) value(:quantite, :id_commande, :id_produit)";
-        $addCP = $mysqlClient->prepare($sqlQuery);
+        $addCP = $pdo->prepare($sqlQuery);
         $addCP->execute([
-            "quantite" => $quantite,
-            "id_commande" => $id_commande,
-            "id_produit" => $id_produit
+            "quantite" => $this->quantite,
+            "id_commande" => $this->idCommande,
+            "id_produit" => $this->idProduit
         ]);
     }
 
-    function getProduitInCommande($IDcommande)
+    function getAllInCommande()
     {
-        global $mysqlClient;
-        $sqlQuery = "SELECT * FROM commande_produit WHERE id_commande = $IDcommande";
-        $prodInCom = $mysqlClient->prepare($sqlQuery);
+        $pdo = Database::getPDO();
+        $sqlQuery = "SELECT * FROM commande_produit WHERE id_commande = $this->idCommande";
+        $prodInCom = $pdo->prepare($sqlQuery);
         $prodInCom->execute();
         return $prodInCom->fetchAll();
     }
 
-    function suppProduitInCommande($id_cp)
+    function suppProduitInCommande()
     {
-        global $mysqlClient;
-        $sqlQuery = "DELETE FROM commande_produit WHERE id_cp = $id_cp;";
-        $supp = $mysqlClient->prepare($sqlQuery);
+        $pdo = Database::getPDO();
+        $sqlQuery = "DELETE FROM commande_produit WHERE id_cp = $this->id;";
+        $supp = $pdo->prepare($sqlQuery);
         $supp->execute();
     }
 }

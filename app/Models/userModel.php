@@ -6,12 +6,25 @@ use PDO;
 
 class userModel
 {
-    function isUser($email)
-    {
-        global $mysqlClient;
+    private $email;
+    private $MDP;
+    private $nom;
+    private $prenom;
 
+    public function __construct($email, $MDP, $nom = null, $prenom = null)
+    {
+        $this->email = $email;
+        $this->MDP = $MDP;
+        $this->nom = $nom;
+        $this->prenom = $prenom;
+    }
+
+
+    public function isUser($email)
+    {
+        $pdo = Database::getPDO();
         $sqlQuery = "SELECT id_user FROM users WHERE email = :email";
-        $getEmail = $mysqlClient->prepare($sqlQuery);
+        $getEmail = $pdo->prepare($sqlQuery);
         $getEmail->execute([
             'email' => $email
         ]);
@@ -19,47 +32,50 @@ class userModel
     }
 
 
-    function getUserId($email)
+    public function getUserId()
     {
-        global $mysqlClient;
+        $pdo = Database::getPDO();
         $sqlQuery = "SELECT id_user FROM users WHERE email = :email";
-        $getID = $mysqlClient->prepare($sqlQuery);
+        $getID = $pdo->prepare($sqlQuery);
         $getID->execute([
-            'email' => $email
+            'email' => $this->email
         ]);
-
         return $getID->fetch();
-
     }
 
-    function register($userNew)
+    public function getRole()
     {
-        global $mysqlClient;
-        $sqlQuery = 'INSERT into users(email, MDP, nom, prenom) value(:email, :MDP, :nom, :prenom)';
-        $addUser = $mysqlClient->prepare($sqlQuery);
+        $pdo = Database::getPDO();
+        $sqlQuery = "SELECT titre FROM roles INNER JOIN users ON roles.id_role = users.id_role WHERE id_user = :id_user;";
+        $getRole = $pdo->prepare($sqlQuery);
+        $userID = $this->getUserId()['id_user'];
+        $getRole->execute([
+            'id_user' => $userID
+        ]);
+        return $getRole->fetch(PDO::FETCH_ASSOC);
+    }
+    public function registerAndLog()
+    {
+        $pdo = Database::getPDO();
+        $sqlQuery = 'INSERT into users(email, MDP, nom, prenom, id_role) value(:email, :MDP, :nom, :prenom, 2)';
+        $addUser = $pdo->prepare($sqlQuery);
         $addUser->execute([
-            'email' => $userNew['email'],
-            'MDP' => $userNew['MDP'],
-            'nom' => $userNew['nom'],
-            'prenom' => $userNew['prenom']
+            'email' => $this->email,
+            'MDP' => $this->MDP,
+            'nom' => $this->nom,
+            'prenom' => $this->prenom
         ]);
-
-        return 'ajout réussis';
+        return $this->getUserId();
     }
 
-    function login($email, $MDP)
+    public function login()
     {
-        global $mysqlClient;
+        $pdo = Database::getPDO();
         $sqlQuery = "SELECT MDP FROM users WHERE email = :email";
-        $loginRequest = $mysqlClient->prepare($sqlQuery);
+        $loginRequest = $pdo->prepare($sqlQuery);
         $loginRequest->execute([
-            'email' => $email
+            'email' => $this->email
         ]);
-        if ($loginRequest->fetch()['MDP'] == $MDP) {
-            return true;
-        } else
-            return false;
+        return $loginRequest->fetch();
     }
-
-
 }

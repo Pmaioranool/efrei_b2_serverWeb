@@ -1,6 +1,6 @@
 <main class="centered">
     <h1>Me connecter</h1>
-    <form action="  " method="post">
+    <form action="/login" method="post">
         <label for="email">Votre email :
         </label>
         <input type="email" name="email" id="email" placeholder="exemple@exemple.com" maxlength="100" required>

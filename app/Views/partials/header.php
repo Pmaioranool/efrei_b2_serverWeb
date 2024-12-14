@@ -25,27 +25,25 @@
                 <li>
                     <a href="produit">Shop</a>
                 </li>
-                <?php if(isset($_SESSION['userID']) && !empty($_SESSION['userID'])){ ?>
-                <li>
-                    <a href="panier" id='panierLink'>
-                        <i class="fa-solid fa-basket-shopping"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="admin">Admin</a>
-                </li>
-                <li>
-                    <a href="logout" id="logout">Déconnexion</a>
-                </li>
-                <h1>Zizi</h1>
-                <?php }
-                else{ ?>
-                <li>
-                    <a href="register">register</a>
-                </li>
-                <li>
-                    <a href="login">login</a>
-                </li>
+                <?php if (isset($_SESSION['userID']) && !empty($_SESSION['userID'])) { ?>
+                    <li>
+                        <a href="panier?id=<?= $_SESSION['userID'] ?>" id='panierLink'>
+                            <i class="fa-solid fa-basket-shopping"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="admin">Admin</a>
+                    </li>
+                    <li>
+                        <a href="logout" id="logout">Déconnexion</a>
+                    </li>
+                <?php } else { ?>
+                    <li>
+                        <a href="register">register</a>
+                    </li>
+                    <li>
+                        <a href="login">login</a>
+                    </li>
                 <?php } ?>
 
             </ul>

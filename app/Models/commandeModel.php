@@ -6,50 +6,57 @@ use PDO;
 
 class commandeModel
 {
-    function addCommande($userID)
+    private $id;
+    private $userID;
+
+    public function __construct($id = null, $IDuser = null)
     {
+        $this->id = $id;
+        $this->userID = $IDuser;
+    }
+    public function addCommande()
+    {
+        $user = $this->userID;
+        //dump($user);
         $date = date('Y-m-d');
-        global $mysqlClient;
-        $sqlQuery = "INSERT INTO commandes(date_creation, id_user) VALUES (:date_creation, :id_user)"; // Change 'value' to 'VALUES'
-        $panier = $mysqlClient->prepare($sqlQuery); // Use prepare instead of query for parameterized queries
-        $panier->execute([
-            "date_creation" => $date,
-            "id_user" => $userID
-        ]);
+        $pdo = Database::getPDO();
+        $sqlQuery = "INSERT INTO commandes(date_creation, id_user) VALUES (:date, :userID);";
+        $panier = $pdo->prepare($sqlQuery);
+        $panier->execute(['date' => $date, 'userID' => $this->userID]);
     }
 
-    function getAllCommande()
+    public function getAllCommande()
     {
-        global $mysqlClient;
+        $pdo = Database::getPDO();
         $sqlQuery = 'SELECT * from commandes';
-        $panier = $mysqlClient->prepare($sqlQuery);
+        $panier = $pdo->prepare($sqlQuery);
         $panier->execute();
         return $panier->fetchAll();
 
     }
-    function getACommandeByID($id)
+    public function getACommandeByID()
     {
-        global $mysqlClient;
-        $sqlQuery = "SELECT * FROM commandes WHERE id_commande = $id";
-        $panier = $mysqlClient->prepare($sqlQuery);
+        $pdo = Database::getPDO();
+        $sqlQuery = "SELECT * FROM commandes WHERE id_commande = $this->id);";
+        $panier = $pdo->prepare($sqlQuery);
         $panier->execute();
         return $panier->fetch(PDO::FETCH_ASSOC);
     }
 
-    function getAllCommandeByUser($id_user)
+    public function getAllCommandeByUser()
     {
-        global $mysqlClient;
-        $sqlQuery = "SELECT * FROM commandes WHERE id_user = $id_user";
-        $panier = $mysqlClient->prepare($sqlQuery);
+        $pdo = Database::getPDO();
+        $sqlQuery = "SELECT * FROM commandes WHERE id_user = $this->userID;";
+        $panier = $pdo->prepare($sqlQuery);
         $panier->execute();
         return $panier->fetchAll();
     }
 
-    function getACommandeByUser($id_user)
+    public function getACommandeByUser()
     {
-        global $mysqlClient;
-        $sqlQuery = "SELECT * FROM commandes WHERE id_user = $id_user ORDER BY date_creation DESC LIMIT 1";
-        $panier = $mysqlClient->prepare($sqlQuery);
+        $pdo = Database::getPDO();
+        $sqlQuery = "SELECT * FROM commandes WHERE id_user = $this->userID ORDER BY date_creation DESC LIMIT 1;";
+        $panier = $pdo->prepare($sqlQuery);
         $panier->execute();
         return $panier->fetch(PDO::FETCH_ASSOC);
     }

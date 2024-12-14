@@ -3,8 +3,7 @@
 // On va imaginer qu'il y a un dossier App puis un dossier controller dedans et on va ranger cette classe (CatalogController) dedans
 namespace App\Controllers; // Maintenant jai rangé CatalogController dans le dossier imaginaire App\Controllers
 
-use App\Models\productModel;
-use App\Models\userModel;
+use App\Controllers\MainController;
 
 class CoreController
 {
@@ -34,33 +33,17 @@ class CoreController
     public function isConnected()
     {
         if (!$_SESSION['userID']) {
-            header('/');
-            exit;
+            header('Location: /');
         }
     }
 
     public function isAdmin()
     {
-        if (!$_SESSION['admin'] == true) {
-            header('/');
+        $this->isConnected();
+        if (!$_SESSION['userRole'] == 'ADMIN') {
+            header('Location: /');
         }
-    }
-    public function getUser()
-    {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $email = $_POST['email'];
-            $MDP = $_POST['MDP'];
-            $userManager = new userModel();
-            // Vérifier les informations de connexion
-            if ($userManager->login($email, $MDP)) {
-                // Récupérer l'ID de l'utilisateur
-                $userId = $userManager->getUserId($email);
-                $_SESSION['userID'] = $userId['id_user'];
-                header('Location: /');
-            } else {
-                echo '<div class="incorrect">Identifiants incorrects.</div>';
-            }
-        }
+
     }
 
 }
