@@ -4,12 +4,13 @@
 namespace App\Controllers; // Maintenant jai rangé CatalogController dans le dossier imaginaire App\Controllers
 
 use App\Controllers\MainController;
+use App\Models\categoriesModel;
 
 class CoreController
 {
     public function notFound()
     {
-        http_response_code(404);
+        http_response_code(404); // renvois une erreur 404 si la page n'existe pas
         echo "404 - Page Not Found!";
     }
 
@@ -17,6 +18,9 @@ class CoreController
     protected function render($view, $data = [])
     {
         // Transmet les données aux vues
+        $categoryModel = new categoriesModel;
+        $categoryHeader = $categoryModel->getAllCategories();
+        extract($categoryHeader); // data pour le header
         extract($data);
 
         // Inclut la vue demandée
@@ -30,18 +34,22 @@ class CoreController
         }
     }
 
+    // Si l'utilisateur n'est pas connecté renvoie vers la page de connexion
     public function isConnected()
     {
         if (!$_SESSION['userID']) {
-            header('Location: /');
+            header('Location: /login');
+            exit;
         }
     }
 
+    // Si l'utilisateur n'est pas admin renvoie vers la page de home
     public function isAdmin()
     {
         $this->isConnected();
-        if (!$_SESSION['userRole'] == 'ADMIN') {
+        if (!($_SESSION['userRole'] == 'ADMIN')) {
             header('Location: /');
+            exit;
         }
 
     }

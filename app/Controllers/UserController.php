@@ -8,20 +8,13 @@ use App\Models\commandeModel;
 
 class UserController extends CoreController
 {
-    // Page "admin"
-    public function admin()
-    {
-        $this->isAdmin();
-        $this->render('user/admin');
-    }
     // Page "logout"
     public function logout()
     {
         $this->isConnected();
         session_unset(); // Supprime toutes les variables de session
         session_destroy(); // Détruit la session
-        $MainManager = new MainController();
-        $MainManager->home();
+        header('Location : /');
         exit;
     }
     //page "register"

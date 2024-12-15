@@ -8,6 +8,7 @@ use App\Controllers\MainController;
 use App\Controllers\ProductController;
 use App\Controllers\UserController;
 use App\Controllers\PanierController;
+use App\Controllers\AdminController;
 
 // Je créer une instance de AltoRouter (la librairie que j'ai installé)
 $router = new AltoRouter();
@@ -39,16 +40,17 @@ $router->addRoutes(array(
             'controller' => MainController::class, // Dans quel controller ?
             'action' => 'produit' // Quelle méthode dans ce controller ?
         ],
-        'produits'
+        'produit'
     ),
+    // affiche la page categorie
     array(
-        'POST',
-        '/produit',
+        'GET',
+        '/categorie',
         [
-            'controller' => PanierController::class, // Dans quel controller ?
-            'action' => 'addProductInPanier' // Quelle méthode dans ce controller ?
+            'controller' => ProductController::class, // Dans quel controller ?
+            'action' => 'productByCategory' // Quelle méthode dans ce controller ?
         ],
-        'addProduitsPanier'
+        'productByCategory'
     ),
     // affiche la page register
     array(
@@ -68,7 +70,7 @@ $router->addRoutes(array(
             'controller' => UserController::class, // Dans quel controller ?
             'action' => 'registerUser' // Quelle méthode dans ce controller ?
         ],
-        'registerPOST'
+        'registerUser'
     ),
     // affiche la page login
     array(
@@ -88,7 +90,7 @@ $router->addRoutes(array(
             'controller' => UserController::class, // Dans quel controller ?
             'action' => 'loginUser' // Quelle méthode dans ce controller ?
         ],
-        'loginPOST'
+        'loginUser'
     ),
     // supprime si il y a une valeur dans $_SESSION['userID'] et affiche la page accueil
     array(
@@ -100,15 +102,15 @@ $router->addRoutes(array(
         ],
         'logout'
     ),
-    // affiche la page admin
+    // ajoute un nouveau produit dans le panier
     array(
-        'GET',
-        '/admin',
+        'POST',
+        '/produit',
         [
-            'controller' => UserController::class, // Dans quel controller ?
-            'action' => 'admin' // Quelle méthode dans ce controller ?
+            'controller' => PanierController::class, // Dans quel controller ?
+            'action' => 'addProductInPanier' // Quelle méthode dans ce controller ?
         ],
-        'admin'
+        'addProductInPanier'
     ),
     // affiche la page panier
     array(
@@ -128,11 +130,80 @@ $router->addRoutes(array(
             'controller' => PanierController::class, // Dans quel controller ?
             'action' => 'supprimer' // Quelle méthode dans ce controller ?
         ],
-        'supprimerInPanier'
+        'supprimer'
+    ),
+    // affiche la page admin
+    array(
+        'GET',
+        '/admin',
+        [
+            'controller' => AdminController::class, // Dans quel controller ?
+            'action' => 'admin' // Quelle méthode dans ce controller ?
+        ],
+        'admin'
+    ),
+    // affiche le form pour ajouter un admin
+    array(
+        'GET',
+        '/admin/adminUser',
+        [
+            'controller' => AdminController::class, // Dans quel controller ?
+            'action' => 'adminUser' // Quelle méthode dans ce controller ?
+        ],
+        'adminUser'
+    ),
+    // ajouter un admin avec l'email
+    array(
+        'POST',
+        '/admin/adminUser',
+        [
+            'controller' => AdminController::class, // Dans quel controller ?
+            'action' => 'addAdminUser' // Quelle méthode dans ce controller ?
+        ],
+        'addAdminUser'
+    ),
+    // affiche le form pour ajouter une categorie
+    array(
+        'GET',
+        '/admin/adminCategory',
+        [
+            'controller' => AdminController::class, // Dans quel controller ?
+            'action' => 'adminCategory' // Quelle méthode dans ce controller ?
+        ],
+        'adminCategory'
+    ),
+    // ajouter une categorie
+    array(
+        'POST',
+        '/admin/adminCategory',
+        [
+            'controller' => AdminController::class, // Dans quel controller ?
+            'action' => 'addAdminCategory' // Quelle méthode dans ce controller ?
+        ],
+        'addAdminCategory'
+    ),
+    // affiche le form pour ajouter un produit
+    array(
+        'GET',
+        '/admin/adminProduct',
+        [
+            'controller' => AdminController::class, // Dans quel controller ?
+            'action' => 'adminProduct' // Quelle méthode dans ce controller ?
+        ],
+        'adminProduct'
+    ),
+    // ajouter un produit
+    array(
+        'POST',
+        '/admin/adminProduit',
+        [
+            'controller' => AdminController::class, // Dans quel controller ?
+            'action' => 'addAdminProduct' // Quelle méthode dans ce controller ?
+        ],
+        'addAdminProduct'
     )
 
 ));
-
 // Ici on check si la route sur laquelle on est a bien été mappé
 // doc : https://altorouter.com/usage/matching-requests.html
 // La valeur de retour de $router->match() sera egal a false si la route vers laquelle on fait une requete http n'existe pas (n'a pas été routé)

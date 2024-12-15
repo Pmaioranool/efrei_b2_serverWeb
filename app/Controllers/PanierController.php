@@ -12,7 +12,7 @@ class PanierController extends CoreController
     // Page "panier"
     public function panier()
     {
-        $this->isConnected();
+        $this->isConnected(); // regarde si l'utilisateur est connecté
         $commandeModel = new commandeModel(null, $_SESSION['userID']);
         if (($commandeModel->getAllCommandeByUser()) == []) {
             $commandeModel->addCommande();

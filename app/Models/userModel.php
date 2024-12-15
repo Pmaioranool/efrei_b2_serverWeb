@@ -11,7 +11,7 @@ class userModel
     private $nom;
     private $prenom;
 
-    public function __construct($email, $MDP, $nom = null, $prenom = null)
+    public function __construct($email = null, $MDP = null, $nom = null, $prenom = null)
     {
         $this->email = $email;
         $this->MDP = $MDP;
@@ -77,5 +77,17 @@ class userModel
             'email' => $this->email
         ]);
         return $loginRequest->fetch();
+    }
+
+    public function addAdmin()
+    {
+        $pdo = Database::getPDO();
+        $sqlQuery = "UPDATE users SET id_role = 1 WHERE email = :email;";
+        $adminRequest = $pdo->prepare($sqlQuery);
+        $adminRequest->execute(
+            [
+                'email' => $this->email
+            ]
+        );
     }
 }

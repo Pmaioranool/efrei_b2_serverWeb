@@ -17,8 +17,15 @@ class ProductController extends CoreController
     }
     public function catalogue()
     {
-        $productManager = new productModel();
-        $products = $productManager->getAllProduit();
+        $productModel = new productModel();
+        $products = $productModel->getAllProduit();
         return $this->render('product/catalogue', $products);
+    }
+
+    public function productByCategory()
+    {
+        $productModel = new productModel(null, null, null, null, null, $_GET['id']);
+        $produits = $productModel->getProductByCategories();
+        $this->render('product/category', $produits);
     }
 }

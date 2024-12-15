@@ -14,7 +14,6 @@ html {
 }
 
 body {
-  height: 100%;
   min-height: 100%; /* Prend toute la hauteur */
   display: flex;
   flex-direction: column;

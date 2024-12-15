@@ -11,27 +11,29 @@ class productModel
     private $description;
     private $image;
     private $prix;
+    private $idC;
 
-    public function __construct($id = null, $nom = null, $description = null, $image = null, $prix = null)
+    public function __construct($id = null, $nom = null, $description = null, $image = null, $prix = null, $idC = null)
     {
         $this->id = $id;
         $this->nom = $nom;
         $this->description = $description;
         $this->image = $image;
         $this->prix = $prix;
+        $this->idC = $idC;
     }
-    //TODO: Ajouter un panel admin avec roles
 
-    public function addProduit()
+    public function addProduct()
     {
         $pdo = Database::getPDO();
-        $sqlQuery = "INSERT INTO produits(nom, description, image, prix) VALUES (:nom, :description, :image, :prix)";
+        $sqlQuery = "INSERT INTO produits(nom, description, image, prix, id_categorie) VALUES (:nom, :description, :image, :prix, :id_categorie)";
         $newProduct = $pdo->prepare($sqlQuery);
         $newProduct->execute([
             "nom" => $this->nom,
             "description" => $this->description,
             "image" => $this->image,
-            "prix" => $this->prix
+            "prix" => $this->prix,
+            "id_categorie" => $this->idC
         ]);
     }
 
@@ -49,7 +51,9 @@ class productModel
         $pdo = Database::getPDO();
         $sqlQuery = "SELECT * FROM produits WHERE id_produit = :id";
         $product = $pdo->prepare($sqlQuery);
-        $product->execute(['id' => $this->id]);
+        $product->execute([
+            'id' => $this->id
+        ]);
         return $product->fetch(PDO::FETCH_ASSOC);
     }
 
@@ -60,5 +64,16 @@ class productModel
         $products = $pdo->prepare($sqlQuery);
         $products->execute();
         return $products->fetchAll();
+    }
+
+    public function getProductByCategories()
+    {
+        $pdo = Database::getPDO();
+        $sqlQuery = "SELECT * FROM produits WHERE id_categorie = :idC";
+        $product = $pdo->prepare($sqlQuery);
+        $product->execute([
+            'idC' => $this->idC
+        ]);
+        return $product->fetchAll();
     }
 }

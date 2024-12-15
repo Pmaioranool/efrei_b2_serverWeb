@@ -5,7 +5,6 @@ namespace App\Controllers;
 use App\Models\productModel;
 use App\Controllers\CoreController;
 
-
 class MainController extends CoreController
 {
     // Page d'accueil
@@ -16,6 +15,7 @@ class MainController extends CoreController
         $this->render('home', $products);
     }
 
+    // regarde si il y a une id dans l'url
     public function produit()
     {
         $ProductManager = new ProductController;
