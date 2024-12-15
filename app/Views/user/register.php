@@ -1,8 +1,3 @@
-<?php
-include_once "controller/userController.php"
-
-
-    ?>
 <main class="centered">
     <h1>Créer mon compte</h1>
     <form action="/register" method="post">

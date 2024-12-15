@@ -24,7 +24,7 @@ $categories = $data
         <label for="prix">prix du produit</label>
         <input type="float" name="prix" id="prix" placeholder="prix du produit" maxlength="50" required>
         <br>
-        <label for="categorie">categoriser en tant que</label>
+        <label for="categorie">categoriser en tant que </label>
         <select name="categorie" id="categorie" required>
             <option value="">choississer une categorie</option>
             <?php

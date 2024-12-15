@@ -8,11 +8,12 @@ class categoriesModel
 {
     private $titre;
 
-    public function __construct($titre = null, $parent = null)
+    public function __construct($titre = null)
     {
         $this->titre = $titre;
     }
 
+    // ajoute une nouvelle categorie
     public function addCategory()
     {
         $pdo = Database::getPDO();
@@ -25,6 +26,7 @@ class categoriesModel
         );
     }
 
+    // renvoie toutes les categories
     public function getAllCategories()
     {
         $pdo = Database::getPDO();

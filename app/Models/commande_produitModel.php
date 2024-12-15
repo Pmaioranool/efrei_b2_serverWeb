@@ -2,7 +2,6 @@
 
 namespace App\Models;
 use App\Utils\Database;
-use PDO;
 
 class commande_produitModel
 {
@@ -18,7 +17,9 @@ class commande_produitModel
         $this->idProduit = $idP;
         $this->quantite = $qt;
     }
-    function addCommandeProduit()
+
+    // ajoute un produit dans la commande
+    public function addCommandeProduit()
     {
         $pdo = Database::getPDO();
         $sqlQuery = "INSERT into commande_produit(quantite, id_commande, id_produit) value(:quantite, :id_commande, :id_produit)";
@@ -30,7 +31,8 @@ class commande_produitModel
         ]);
     }
 
-    function getAllInCommande()
+    // recoit tous ce qui est dans la table commande_produit
+    public function getAllInCommande()
     {
         $pdo = Database::getPDO();
         $sqlQuery = "SELECT * FROM commande_produit WHERE id_commande = $this->idCommande";
@@ -39,7 +41,8 @@ class commande_produitModel
         return $prodInCom->fetchAll();
     }
 
-    function suppProduitInCommande()
+    // supprimme un produit de la commande
+    public function suppProduitInCommande()
     {
         $pdo = Database::getPDO();
         $sqlQuery = "DELETE FROM commande_produit WHERE id_cp = $this->id;";

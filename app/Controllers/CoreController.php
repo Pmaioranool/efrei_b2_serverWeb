@@ -3,7 +3,6 @@
 // On va imaginer qu'il y a un dossier App puis un dossier controller dedans et on va ranger cette classe (CatalogController) dedans
 namespace App\Controllers; // Maintenant jai rangé CatalogController dans le dossier imaginaire App\Controllers
 
-use App\Controllers\MainController;
 use App\Models\categoriesModel;
 
 class CoreController
@@ -39,7 +38,7 @@ class CoreController
     {
         if (!$_SESSION['userID']) {
             header('Location: /login');
-            exit;
+            exit();
         }
     }
 
@@ -49,7 +48,7 @@ class CoreController
         $this->isConnected();
         if (!($_SESSION['userRole'] == 'ADMIN')) {
             header('Location: /');
-            exit;
+            exit();
         }
 
     }

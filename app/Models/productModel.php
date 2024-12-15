@@ -23,6 +23,7 @@ class productModel
         $this->idC = $idC;
     }
 
+    // crée un produit
     public function addProduct()
     {
         $pdo = Database::getPDO();
@@ -37,6 +38,7 @@ class productModel
         ]);
     }
 
+    // récupère tous les produits
     public function getAllProduit()
     {
         $pdo = Database::getPDO();
@@ -46,6 +48,7 @@ class productModel
         return $product->fetchAll();
     }
 
+    // récupère un produit par son id
     public function getAProduit()
     {
         $pdo = Database::getPDO();
@@ -57,6 +60,7 @@ class productModel
         return $product->fetch(PDO::FETCH_ASSOC);
     }
 
+    // recupère les 8 dernier produits
     public function getLastProduits()
     {
         $pdo = Database::getPDO();
@@ -66,6 +70,7 @@ class productModel
         return $products->fetchAll();
     }
 
+    // récupère tous les produits d'une catégorie
     public function getProductByCategories()
     {
         $pdo = Database::getPDO();

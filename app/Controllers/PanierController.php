@@ -14,43 +14,37 @@ class PanierController extends CoreController
     {
         $this->isConnected(); // regarde si l'utilisateur est connecté
         $commandeModel = new commandeModel(null, $_SESSION['userID']);
-        if (($commandeModel->getAllCommandeByUser()) == []) {
+        if (($commandeModel->getAllCommandeByUser()) == []) { // si le panier est n'existe pas ça le créé
             $commandeModel->addCommande();
         }
-        $commandeUser = $commandeModel->getACommandeByUser();
+
+        $commandeUser = $commandeModel->getACommandeByUser(); // cherche le dernièr panier 0de l'utilisateur
         $CPModel = new commande_produitModel(null, $commandeUser['id_commande']);
-        $commandes = $CPModel->getAllInCommande();
+        $commandes = $CPModel->getAllInCommande(); // cherche tous les produits et quantité dans le panier
         $produits = [];
+
         foreach ($commandes as $commande) {
             $produitModel = new ProductModel($commande['id_produit']);
-            $produits[] = $produitModel->getAProduit();
+            $produits[] = $produitModel->getAProduit(); // ajoute dans un tableau les datas des produits
         }
+
         $data = [
             'CP' => $commandes,
             'P' => $produits
         ];
+
         $this->render('panier/panier', $data);
     }
 
-    //Page "commandes"
-    public function commandes()
-    {
-        $commandeManager = new CommandeModel();
-        dump($commandeManager->getAllCommandeByUser());
-        if (!($commandeManager->getAllCommandeByUser())) {
-            $userID = $_SESSION['userID'];
-            $CommandeModel = new CommandeModel($userID);
-            $CommandeModel->addCommande();
-        }
-        $this->render('panier/allPanier');
-    }
-
+    // supprimer un produit dans le panier
     public function supprimer()
     {
         $commande_produitManager = new commande_produitModel($_GET['id']);
         $commande_produitManager->suppProduitInCommande();
         $this->panier();
     }
+
+    // ajouter un produit dans le panier
     public function addProductInPanier()
     {
         $this->isConnected();
@@ -61,8 +55,8 @@ class PanierController extends CoreController
             $commandeManager = new commandeModel(null, $id_user);
             $panier = $commandeManager->getACommandeByUser();
             $panierID = $panier['id_commande'];
-            $id_produit = intval($_POST['id_produit']); // Sécuriser l'ID produit
-            $quantite = intval($_POST['quantite']); // Sécuriser la quantité
+            $id_produit = $_POST['id_produit']; // Sécuriser l'ID produit
+            $quantite = $_POST['quantite']; // Sécuriser la quantité
 
             // Appeler la fonction pour ajouter au panier
             $commande_productManager = new commande_produitModel(null, $panierID, $id_produit, $quantite);

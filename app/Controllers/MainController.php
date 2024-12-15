@@ -12,13 +12,14 @@ class MainController extends CoreController
     {
         $productManager = new productModel();
         $products = $productManager->getLastProduits();
+        // cherche les 8 derniers produits ajouter
         $this->render('home', $products);
     }
 
-    // regarde si il y a une id dans l'url
     public function produit()
     {
         $ProductManager = new ProductController;
+        // regarde si il y a une id dans l'url
         if (isset($_GET['id']) && !empty($_GET['id'])) {
             $ProductManager->produit();// Redirection vers la page produit spécifique
         } else {

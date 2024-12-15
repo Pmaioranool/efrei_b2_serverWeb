@@ -19,19 +19,7 @@ class userModel
         $this->prenom = $prenom;
     }
 
-
-    public function isUser($email)
-    {
-        $pdo = Database::getPDO();
-        $sqlQuery = "SELECT id_user FROM users WHERE email = :email";
-        $getEmail = $pdo->prepare($sqlQuery);
-        $getEmail->execute([
-            'email' => $email
-        ]);
-        return $getEmail->fetch() !== false;
-    }
-
-
+    // récupère l'id de l'utilisateur depuis son email
     public function getUserId()
     {
         $pdo = Database::getPDO();
@@ -43,6 +31,7 @@ class userModel
         return $getID->fetch();
     }
 
+    // récupère le role de l'utilisateur
     public function getRole()
     {
         $pdo = Database::getPDO();
@@ -54,10 +43,13 @@ class userModel
         ]);
         return $getRole->fetch(PDO::FETCH_ASSOC);
     }
-    public function registerAndLog()
+
+    // enregistre les information de l'utilisateur
+    public function register()
     {
         $pdo = Database::getPDO();
-        $sqlQuery = 'INSERT into users(email, MDP, nom, prenom, id_role) value(:email, :MDP, :nom, :prenom, 2)';
+        $membre = 2;
+        $sqlQuery = "INSERT into users(email, MDP, nom, prenom, id_role) value(:email, :MDP, :nom, :prenom, $membre)";
         $addUser = $pdo->prepare($sqlQuery);
         $addUser->execute([
             'email' => $this->email,
@@ -68,6 +60,7 @@ class userModel
         return $this->getUserId();
     }
 
+    // cherche dans la db le mot de passe qui correspond a l'email
     public function login()
     {
         $pdo = Database::getPDO();
@@ -79,15 +72,29 @@ class userModel
         return $loginRequest->fetch();
     }
 
+    // change le role de l'utilisateur en ADMIN
     public function addAdmin()
     {
         $pdo = Database::getPDO();
-        $sqlQuery = "UPDATE users SET id_role = 1 WHERE email = :email;";
+        $admin = 1;
+        $sqlQuery = "UPDATE users SET id_role = $admin WHERE email = :email;";
         $adminRequest = $pdo->prepare($sqlQuery);
         $adminRequest->execute(
             [
                 'email' => $this->email
             ]
         );
+    }
+
+    // regarde si l'email existe déjà
+    public function getEmail()
+    {
+        $pdo = Database::getPDO();
+        $sqlQuery = 'SELECT email FROM users WHERE email = :email';
+        $emailRequest = $pdo->prepare($sqlQuery);
+        $emailRequest->execute([
+            'email' => $this->email
+        ]);
+        return $emailRequest;
     }
 }
