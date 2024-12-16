@@ -2,14 +2,10 @@ efrei_b2_serverWeb <!-- omit in toc -->
 ===
 
 - [à faire](#à-faire)
-- [Simple PHP Project](#simple-php-project)
-- [This is a simple PHP project that uses composer to manage dependencies.](#this-is-a-simple-php-project-that-uses-composer-to-manage-dependencies)
   - [Installation](#installation)
   - [Start server using php](#start-server-using-php)
-    - [You can now access the project at `http://localhost:5001` in your browser.](#you-can-now-access-the-project-at-httplocalhost5001-in-your-browser)
-  - [create new user for mysql](#create-new-user-for-mysql)
-  - [utilisation](#utilisation)
-- [admin](#admin)
+- [connexion a la base de données](#connexion-a-la-base-de-données)
+- [utilisation](#utilisation)
 
 
 # à faire
@@ -19,10 +15,6 @@ efrei_b2_serverWeb <!-- omit in toc -->
 - [x] **Login** : Connexion utilisateur.
 - [x] **Register** : Inscription utilisateur.
 - [x] **Panier** : Liste des articles ajoutés au panier.
-
-# Simple PHP Project
-
-# This is a simple PHP project that uses composer to manage dependencies.
 
 ## Installation
 
@@ -44,18 +36,35 @@ composer install
 php -S localhost:5001 -t public
 ```
 
-### You can now access the project at `http://localhost:5001` in your browser.
+### You can now access the project at `http://localhost:5001` in your browser. <!-- omit in toc -->
 
+# connexion a la base de données
 
-## create new user for mysql
+## create new user for mysql <!-- omit in toc -->
 
 ```mysql
 CREATE USER 'username'@'hostname' IDENTIFIED BY 'password';
+
+GRANT select, update, delete, insert ON database_name.* TO 'username'@'hostname';
+
+FLUSH PRIVILEGE;
+```
+## remplir le fichier .config.ini <!-- omit in toc -->
+
+```ini
+# Host du serveur de base de données
+DB_HOST=localhost
+# Nom de la base de données
+DB_NAME=b2dev2serverweblm
+# Username de l'utilisateur qui peut se connecter à la base de données
+DB_USERNAME=username
+# Password de l'utilisateur qui peut se connecter à la base de données
+DB_PASSWORD=password
 ```
 
-## utilisation
+# utilisation
 
-# admin
+## admin <!-- omit in toc -->
 
 log : admin@admin.com
 
